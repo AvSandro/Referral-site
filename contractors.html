@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NT Estate Partners - For Contractors</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Back link styling */
+        .back-link {
+            display: inline-block;
+            font-weight: 100;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            text-decoration: none;
+            margin-bottom: 3rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">NT ESTATE PARTNERS</div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="padding: 8rem 2rem;">
+        <div class="hero-content">
+            <a href="index.html" class="back-link">← BACK TO GATEWAY</a>
+            
+            <h1>The End of<br>The Cold Bid</h1>
+            
+            <p class="secondary-text" style="margin: 2rem 0 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Skip the noise of public bidding. Gain direct access to pre-vetted project scopes with $500k+ minimum budgets. We provide the architecture; you provide the craft. Zero platform fees.
+            </p>
+
+            <a href="mailto:ops@ntestatepartners.com?subject=Contractor%20Vendor%20Application" class="btn-ghost">APPLY FOR VENDOR STATUS</a>
+        </div>
+    </section>
+
+    <!-- Value Proposition Section -->
+    <section class="how-it-works" style="padding: 6rem 2rem;">
+        <div class="how-it-works-container">
+            <h2>How It Works</h2>
+            
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">Apply Once</h3>
+                    <p class="step-description">
+                        Submit your portfolio, certifications, and service scope. We verify and activate your vendor profile within 5 business days.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">Receive Vetted Leads</h3>
+                    <p class="step-description">
+                        Access pre-qualified projects with budgets starting at $500k. No blind bidding, no low-ball clients. Premium scope only.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">Close & Deliver</h3>
+                    <p class="step-description">
+                        Work directly with the developer. Zero platform fees, zero markup. 100% of your contract value is yours.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exclusivity Section -->
+    <section style="padding: 6rem 2rem; background: #000000; border-top: 1px solid rgba(255, 255, 255, 0.05);">
+        <div class="contact-container" style="max-width: 700px;">
+            <div style="text-align: center;">
+                <span class="label" style="display: block; margin-bottom: 1rem;">EXCLUSIVE ACCESS</span>
+                <h2 style="margin-bottom: 2rem;">Curated Contractor Network</h2>
+                <p style="color: #a8a29e; margin-bottom: 2rem; font-size: 1rem;">
+                    We maintain strict qualification standards. Only contractors with proven track records on premium builds gain access. This ensures developers work with specialists who deliver excellence.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="contact-section" style="padding: 6rem 2rem;">
+        <div class="contact-container">
+            <div class="contact-card">
+                <span class="label">GET STARTED</span>
+                <h2 style="margin-top: 1rem; margin-bottom: 2rem;">Join the Elite Vendor Network</h2>
+                <p style="margin-bottom: 2rem; color: #a8a29e;">
+                    Include your specialty, service radius, recent project portfolio, and insurance/certification details.
+                </p>
+                <a href="mailto:ops@ntestatepartners.com?subject=Contractor%20Vendor%20Application" class="btn-ghost">APPLY FOR VENDOR STATUS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>NT Estate Partners</h4>
+                    <p style="color: #a8a29e; font-size: 0.95rem;">
+                        Private referral architecture for connecting elite developers with master contractors.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="index.html">Main Gateway</a></li>
+                        <li><a href="developers.html">For Developers</a></li>
+                        <li><a href="index.html#contact-section">Submit Referral</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="legal.html">Terms & Legal</a></li>
+                        <li><a href="legal.html">Privacy Policy</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-tagline">Built for the 1% of Contractors</p>
+                <p class="footer-copyright">&copy; 2024 NT Estate Partners. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth scroll for anchor links -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !href.includes('mailto')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- High-End Interactions Script -->
+    <script src="interactions.js"></script>
+
+    <!-- Micro-Interactions & Scroll Physics -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ============================================
+        // SCROLL REVEAL PHYSICS
+        // ============================================
+
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all major sections for fade-in
+        document.querySelectorAll('.hero, .divider-section, .how-it-works, .contact-section').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // ============================================
+        // STAGGERED CARD REVEAL
+        // ============================================
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.step').forEach((card) => {
+                        card.classList.add('in-view');
+                    });
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const stepsGrid = document.querySelector('.steps-grid');
+        if (stepsGrid) {
+            cardObserver.observe(stepsGrid);
+        }
+    })();
+    </script>
+</body>
+</html>

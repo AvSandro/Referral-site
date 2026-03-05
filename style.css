@@ -1,0 +1,734 @@
+/* ============================================
+   Quiet Luxury CSS - NT Estate Partners
+   ============================================ */
+
+/* Import Ultra-Minimalist Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&ital@1&display=swap');
+
+/* ============================================
+   RESET & GLOBAL STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #000000;
+    color: #a8a29e;
+    line-height: 1.8;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    font-size: 4rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 2.5rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #a8a29e;
+}
+
+.label {
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #a8a29e;
+    margin-bottom: 1rem;
+}
+
+.secondary-text {
+    color: #a8a29e;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 1.125rem;
+    letter-spacing: 0.02em;
+}
+
+/* ============================================
+   HEADER & NAVIGATION
+   ============================================ */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-size: 0.875rem;
+    letter-spacing: 0.6em;
+    text-transform: uppercase;
+    animation: kerning-expand 2s ease-out 0.5s both;
+    color: #ffffff;
+}
+
+/* ============================================
+   ANIMATIONS & KEYFRAMES
+   ============================================ */
+
+@keyframes kerning-expand {
+    from {
+        letter-spacing: 0.2em;
+        opacity: 0;
+    }
+    to {
+        letter-spacing: 0.3em;
+        opacity: 1;
+    }
+}
+
+@keyframes scroll-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes stagger-slide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal {
+    opacity: 0;
+    animation: scroll-reveal 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.step {
+    opacity: 0;
+}
+
+.step.reveal-staggered {
+    animation: stagger-slide 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* ============================================
+   BUTTONS & INTERACTIVE ELEMENTS
+   ============================================ */
+
+.btn-ghost {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ghost::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: -1;
+    transition: left 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    color: #000000;
+    transform: scale(1.02);
+}
+
+.btn-ghost:hover::before {
+    left: 0;
+}
+
+a.btn-ghost {
+    display: inline-block;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -500px;
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    margin-bottom: 3rem;
+}
+
+/* ============================================
+   DIVIDER LINE
+   ============================================ */
+
+.divider-section {
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.divider-line {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    margin: 3rem auto;
+}
+
+.stats-label-top {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.stats-text-bottom {
+    display: block;
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.01em;
+}
+
+/* ============================================
+   HOW IT WORKS SECTION
+   ============================================ */
+
+.how-it-works {
+    padding: 8rem 2rem;
+    background: #000000;
+}
+
+.how-it-works-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.how-it-works h2 {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 4rem;
+    margin-bottom: 2rem;
+}
+
+.step {
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.step:hover {
+    border-top-color: rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.step-number {
+    font-weight: 700;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.1);
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.step-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.step-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #a8a29e;
+}
+
+/* ============================================
+   CONTACT/OPS SECTION
+   ============================================ */
+
+.contact-section {
+    padding: 6rem 2rem;
+    background-color: #000000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-card {
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.contact-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+}
+
+.contact-label {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.email-display {
+    font-weight: 300;
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+    word-break: break-all;
+}
+
+.email-display a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.email-display a:hover {
+    opacity: 0.7;
+}
+
+.copy-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 1rem 0;
+}
+
+.copy-btn:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.copy-feedback {
+    font-size: 0.85rem;
+    color: #a8a29e;
+    margin-top: 1rem;
+}
+
+.instruction-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 0;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #a8a29e;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+    background: #000000;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 4rem 2rem 2rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h4 {
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    text-align: left;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    padding-left: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.75rem;
+    padding: 0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300;
+}
+
+.footer-section a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.footer-section a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.footer-tagline {
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a8a29e;
+    margin-bottom: 1rem;
+}
+
+.footer-copyright {
+    font-size: 0.85rem;
+    color: #a8a29e;
+}
+
+/* Override default link styles in footer */
+footer ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+}
+
+footer li {
+    list-style: none !important;
+    padding-left: 0 !important;
+}
+
+footer a,
+footer a:visited,
+footer a:active {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+footer a:hover {
+    color: #ffffff !important;
+}
+
+/* ============================================
+   ATMOSPHERIC GRAIN OVERLAY
+   ============================================ */
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' result='noise' /%3E%3C/filter%3E%3Crect width='400' height='400' fill='%23000000' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+}
+
+/* ============================================
+   HEADER POLISH REFINEMENT
+   ============================================ */
+
+header {
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   MAGNETIC HOVER - GHOST BUTTONS
+   ============================================ */
+
+.btn-ghost {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-ghost:hover {
+    transform: scale(1.02) translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================
+   MAGNETIC HOVER - DIRECT CHANNEL CARD
+   ============================================ */
+
+.contact-card {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.contact-card:hover {
+    transform: scale(1.02);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   STAGGERED CARD REVEALS
+   ============================================ */
+
+.step {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.step.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step:nth-child(1).in-view {
+    transition-delay: 0ms;
+}
+
+.step:nth-child(2).in-view {
+    transition-delay: 200ms;
+}
+
+.step:nth-child(3).in-view {
+    transition-delay: 400ms;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .hero {
+        min-height: 80vh;
+        padding: 3rem 1.5rem;
+    }
+
+    .divider-line {
+        width: 80%;
+    }
+
+    .how-it-works {
+        padding: 4rem 1.5rem;
+    }
+
+    .steps-grid {
+        gap: 2rem;
+    }
+
+    .contact-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .email-display {
+        font-size: 1.125rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .hero {
+        min-height: 60vh;
+        padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .divider-section {
+        padding: 4rem 1rem;
+    }
+
+    .divider-line {
+        width: 100%;
+    }
+
+    .how-it-works {
+        padding: 3rem 1rem;
+    }
+
+    .step {
+        padding: 1.5rem 0;
+    }
+
+    .step-number {
+        font-size: 2rem;
+    }
+
+    .contact-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .email-display {
+        font-size: 1rem;
+    }
+
+    .btn-ghost {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-large {
+    margin-top: 4rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
