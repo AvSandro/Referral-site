@@ -2,29 +2,16 @@ name = "referral-site"
 main = "worker.js"
 account_id = "b644ee7b79e8e359cf48ff546c5f448f"
 workers_dev = true
+compatibility_date = "2026-03-05"
 route = "ntestatepartners.com/*"
 
-[env.production]
-route = "ntestatepartners.com/*"
+[[bindings]]
+name = "SEND_EMAIL"
+type = "service"
+service = "send-email"
 
-# Environment variables and bindings
-[env.production.vars]
-SEND_FROM = "noreply@ntestatepartners.com"
+[vars]
+SEND_FROM = "leads@ntestatepartners.com"
 
-# For Cloudflare Email Routing (if using native email service)
-# [[env.production.bindings]]
-# name = "SEND_EMAIL"
-# type = "service"
-# service = "send-email"
-
-# For SendGrid integration
-# [env.production]
-# [[env.production.vars]]
-# SENDGRID_API_KEY = "YOUR_SENDGRID_API_KEY"
-
-# For Mailgun integration
-# [env.production]
-# [[env.production.vars]]
-# MAILGUN_API_KEY = "YOUR_MAILGUN_API_KEY"
-# MAILGUN_DOMAIN = "YOUR_MAILGUN_DOMAIN"
-
+[observability]
+enabled = true
