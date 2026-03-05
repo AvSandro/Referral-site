@@ -1,13 +1,11 @@
-name = "nt-estate-partners"
+name = "referral-site"
 main = "worker.js"
-account_id = "YOUR_ACCOUNT_ID"
+account_id = "b644ee7b79e8e359cf48ff546c5f448f"
 workers_dev = true
 route = "ntestatepartners.com/*"
-zone_id = "YOUR_ZONE_ID"
 
 [env.production]
 route = "ntestatepartners.com/*"
-zone_id = "YOUR_ZONE_ID"
 
 # Environment variables and bindings
 [env.production.vars]
@@ -30,7 +28,3 @@ SEND_FROM = "noreply@ntestatepartners.com"
 # MAILGUN_API_KEY = "YOUR_MAILGUN_API_KEY"
 # MAILGUN_DOMAIN = "YOUR_MAILGUN_DOMAIN"
 
-build = { command = "npm install" }
-
-[build.upload]
-format = "service-worker"
