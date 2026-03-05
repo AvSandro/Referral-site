@@ -69,22 +69,64 @@
     <section class="contact-section" id="contact-section">
         <div class="contact-container">
             <div class="contact-card">
-                <span class="label contact-label">Direct Channel</span>
+                <span class="label contact-label">Submit Your Referral</span>
                 
-                <div class="email-display">
-                    <a href="mailto:ops@ntestatepartners.com">ops@ntestatepartners.com</a>
+                <form id="referral-form" method="POST" action="/submit-referral">
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <!-- Service Type -->
+                    <div class="form-group">
+                        <label for="serviceType">Service Type</label>
+                        <select id="serviceType" name="serviceType" required>
+                            <option value="">Select a service...</option>
+                            <option value="pooling">Pools & Water Features</option>
+                            <option value="landscaping">Landscaping & Grounds</option>
+                            <option value="hardscape">Hardscape & Masonry</option>
+                            <option value="design">Design Consultation</option>
+                            <option value="maintenance">Maintenance & Upkeep</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Budget Range -->
+                    <div class="form-group">
+                        <label for="budget">Budget Range</label>
+                        <input type="text" id="budget" name="budget" placeholder="e.g., $50,000 - $150,000">
+                    </div>
+
+                    <!-- Project Details -->
+                    <div class="form-group">
+                        <label for="projectDetails">Project Details</label>
+                        <textarea id="projectDetails" name="projectDetails" rows="5" placeholder="Describe your project scope, timeline, and specialist requirements..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-ghost">SUBMIT REFERRAL</button>
+
+                    <!-- Form Messages -->
+                    <div id="form-message" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 4px;"></div>
+                </form>
+
+                <div class="instruction-box" style="margin-top: 2rem;">
+                    <strong>What happens next:</strong><br>
+                    Our ops team verifies your project and connects you with vetted partners within 48 hours.
                 </div>
-
-                <button class="copy-btn" data-email="ops@ntestatepartners.com">COPY ADDRESS</button>
-                <div class="copy-feedback" style="display: none;">Copied to clipboard</div>
-
-                <div class="instruction-box">
-                    <strong>Include in your referral:</strong><br>
-                    Project scope • Budget range • Timeline • Specialist type needed<br><br>
-                    Our ops team verifies and connects within 48 hours.
-                </div>
-
-                <a href="mailto:ops@ntestatepartners.com" class="btn-ghost">SUBMIT REFERRAL</a>
             </div>
         </div>
     </section>
@@ -151,6 +193,62 @@
                     alert('Email: ' + email);
                 });
             });
+        });
+
+        // Form Submission Handler
+        document.getElementById('referral-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = this;
+            const messageDiv = document.getElementById('form-message');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+
+            try {
+                // Disable submit button
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'SUBMITTING...';
+
+                // Collect form data
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                // Send POST request to Cloudflare Worker
+                const response = await fetch('/submit-referral', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                // Show message
+                messageDiv.className = result.success ? 'success' : 'error';
+                messageDiv.textContent = result.message;
+                messageDiv.style.display = 'block';
+
+                // Reset form on success
+                if (result.success) {
+                    form.reset();
+                    submitBtn.textContent = '✓ SUBMITTED';
+                    setTimeout(() => {
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    }, 3000);
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                messageDiv.className = 'error';
+                messageDiv.textContent = 'An error occurred. Please try again.';
+                messageDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            }
         });
 
         // Smooth scroll for anchor links
