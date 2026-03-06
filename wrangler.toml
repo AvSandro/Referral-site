@@ -17,4 +17,5 @@ DESTINATION_EMAIL = "drololl06@gmail.com"
 enabled = true
 
 [assets]
-directory = "."
+directory = "./"
+

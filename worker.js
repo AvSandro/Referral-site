@@ -11,26 +11,18 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Only run this if the referral form is submitted to the worker endpoint.
+    // 1. Handle referral submissions.
     if (request.method === "POST" && url.pathname === "/submit-referral") {
-      try {
-        const formData = await request.formData();
-        // ... (your email sending logic from before) ...
-        await env.SEND_EMAIL.send({
-          to: env.DESTINATION_EMAIL,
-          from: env.SEND_FROM,
-          subject: "New Lead",
-          content: `New lead from ${formData.get("name") || "Unknown"}`,
-        });
-        return new Response("Success!");
-      } catch (err) {
-        return new Response(err.message, { status: 500 });
-      }
+      return handlePostRequest(request, env);
     }
 
-    // 2. THE FIX: For every other page, just show your actual website files
-    // This stops the Worker from overwriting your HTML
-    return env.ASSETS.fetch(request);
+    // 2. Serve static files for all non-form routes.
+    if (env.ASSETS) {
+      return env.ASSETS.fetch(request);
+    }
+
+    // 3. Last-resort fallback if assets binding is unavailable.
+    return handleGetRequest(env);
   }
 };
 
