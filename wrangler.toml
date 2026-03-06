@@ -1,13 +1,12 @@
 name = "referral-site"
 main = "worker.js"
 account_id = "b644ee7b79e8e359cf48ff546c5f448f"
-workers_dev = true
+workers_dev = false
 compatibility_date = "2026-03-05"
 route = "ntestatepartners.com/*"
 
-[[bindings]]
-name = "SEND_EMAIL"
-type = "service"
+[[services]]
+binding = "SEND_EMAIL"
 service = "send-email"
 
 [vars]
