@@ -5,9 +5,8 @@ workers_dev = true
 compatibility_date = "2026-03-05"
 route = "ntestatepartners.com/*"
 
-[[bindings]]
-name = "SEND_EMAIL"
-type = "service"
+[[services]]
+binding = "SEND_EMAIL"
 service = "send-email"
 
 [vars]
