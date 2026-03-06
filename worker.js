@@ -52,7 +52,11 @@ async function handlePostRequest(request, env) {
       name: data.get("name") || "No Name",
       email: data.get("email") || "No Email",
       phone: data.get("phone") || "No Phone",
-      message: data.get("message") || "No Message"
+      message: data.get("message") || "No Message",
+      primaryGoal: data.get("primaryGoal") || "Not specified",
+      neighborhood: data.get("neighborhood") || "Not specified",
+      timeline: data.get("timeline") || "Not specified",
+      budget: data.get("budget") || "Not specified"
     };
 
     // Validate required fields.
@@ -68,6 +72,10 @@ async function handlePostRequest(request, env) {
 Name: ${formData.name}
 Email: ${formData.email}
 Phone: ${formData.phone}
+Primary Goal: ${formData.primaryGoal}
+Neighborhood: ${formData.neighborhood}
+Timeline: ${formData.timeline}
+Budget: ${formData.budget}
 Message: ${formData.message}`;
 
     // 3. Send the email using the SEND_EMAIL binding.

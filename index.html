@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxury Estate Referrals | Westlake & Southlake, TX</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -181,7 +182,7 @@
 
                     <!-- Step 1: Primary Goal -->
                     <div class="quiz-step active" data-step="1">
-                        <span class="label contact-label">Step 1 of 3</span>
+                        <span class="label contact-label">Step 1 of 4</span>
                         <h2 class="quiz-question">What is your primary goal?</h2>
                         <div class="quiz-options">
                             <button type="button" class="quiz-option" data-value="Luxury Pool Build">
@@ -207,7 +208,7 @@
 
                     <!-- Step 2: Neighborhood -->
                     <div class="quiz-step" data-step="2">
-                        <span class="label contact-label">Step 2 of 3</span>
+                        <span class="label contact-label">Step 2 of 4</span>
                         <h2 class="quiz-question">What is your neighborhood?</h2>
                         <div class="quiz-options">
                             <button type="button" class="quiz-option" data-value="Westlake">Westlake</button>
@@ -220,7 +221,7 @@
 
                     <!-- Step 3: Timeline -->
                     <div class="quiz-step" data-step="3">
-                        <span class="label contact-label">Step 3 of 3</span>
+                        <span class="label contact-label">Step 3 of 4</span>
                         <h2 class="quiz-question">What is your ideal project timeline?</h2>
                         <div class="quiz-options">
                             <button type="button" class="quiz-option" data-value="Immediate">Immediate</button>
@@ -230,8 +231,22 @@
                         <button type="button" class="quiz-back" id="quiz-back-3">&larr; Back</button>
                     </div>
 
-                    <!-- Final Step: Contact Info -->
+                    <!-- Step 4: Budget -->
                     <div class="quiz-step" data-step="4">
+                        <span class="label contact-label">Step 4 of 4</span>
+                        <h2 class="quiz-question">What is your estimated budget?</h2>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-value="$50K – $100K">$50K – $100K</button>
+                            <button type="button" class="quiz-option" data-value="$100K – $150K">$100K – $150K</button>
+                            <button type="button" class="quiz-option" data-value="$150K – $200K">$150K – $200K</button>
+                            <button type="button" class="quiz-option" data-value="$200K – $250K">$200K – $250K</button>
+                            <button type="button" class="quiz-option" data-value="$250K+">$250K+</button>
+                        </div>
+                        <button type="button" class="quiz-back" id="quiz-back-4">&larr; Back</button>
+                    </div>
+
+                    <!-- Final Step: Contact Info -->
+                    <div class="quiz-step" data-step="5">
                         <span class="label contact-label">One Last Step</span>
                         <h2 class="quiz-question">Where should we send your matches?</h2>
 
@@ -240,6 +255,7 @@
                             <input type="hidden" id="quiz-goal" name="primaryGoal" value="">
                             <input type="hidden" id="quiz-neighborhood" name="neighborhood" value="">
                             <input type="hidden" id="quiz-timeline" name="timeline" value="">
+                            <input type="hidden" id="quiz-budget" name="budget" value="">
 
                             <div class="form-group">
                                 <label for="name">Full Name</label>
@@ -258,7 +274,7 @@
 
                             <div id="form-message" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 4px;"></div>
                         </form>
-                        <button type="button" class="quiz-back" id="quiz-back-4">&larr; Back</button>
+                        <button type="button" class="quiz-back" id="quiz-back-5">&larr; Back</button>
                     </div>
                 </div>
 
@@ -316,7 +332,7 @@
         'use strict';
 
         var currentStep = 1;
-        var totalSteps = 4;
+        var totalSteps = 5;
         var answers = {};
 
         function showStep(step) {
@@ -350,6 +366,9 @@
                 } else if (stepNum === 3) {
                     answers.timeline = value;
                     document.getElementById('quiz-timeline').value = value;
+                } else if (stepNum === 4) {
+                    answers.budget = value;
+                    document.getElementById('quiz-budget').value = value;
                 }
 
                 // Advance after brief delay
