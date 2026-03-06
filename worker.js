@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker: NT Estate Partners Lead Generation
+ * Cloudflare Worker: NT Estate Partners Lead Generation v2
  * - Serves HTML on GET requests
  * - Processes referral form submissions on POST requests
  * - Sends lead details to ops@ntestatepartners.com
