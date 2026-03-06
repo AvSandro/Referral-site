@@ -5,8 +5,7 @@
  * - Sends lead details to ops@ntestatepartners.com
  */
 
-import { EmailMessage } from "cloudflare:email";
-import { createMimeMessage } from "mimetext";
+// No imports needed — uses MailChannels API (free from Cloudflare Workers)
 
 export default {
   async fetch(request, env, ctx) {
@@ -85,10 +84,10 @@ async function handlePostRequest(request, env) {
     // Build email content
     const emailContent = buildEmailContent(formData);
 
-    // Send email via Cloudflare Email Routing
+    // Send email via MailChannels
     const emailResponse = await sendEmail(
       env,
-      'ops@ntestatepartners.com',
+      env.DESTINATION_EMAIL || 'drololl06@gmail.com',
       `New Estate Referral from ${formData.name}`,
       emailContent
     );
@@ -136,29 +135,21 @@ Source: ntestatepartners.com
 }
 
 /**
- * Send email via Cloudflare Email Routing
+ * Send email via Cloudflare Email Binding
  */
 async function sendEmail(env, to, subject, content) {
   try {
-    if (env.SEND_EMAIL) {
-      const msg = createMimeMessage();
-      msg.setSender({ name: "NT Estate Partners", addr: env.SEND_FROM || "leads@ntestatepartners.com" });
-      msg.setRecipient(to);
-      msg.setSubject(subject);
-      msg.addMessage({ contentType: "text/plain", data: content });
-      msg.addMessage({ contentType: "text/html", data: formatEmailHtml(content) });
+    const fromAddr = env.SEND_FROM || 'leads@ntestatepartners.com';
 
-      const message = new EmailMessage(
-        env.SEND_FROM || "leads@ntestatepartners.com",
-        to,
-        msg.asRaw()
-      );
+    const message = new EmailMessage({
+      from: fromAddr,
+      to: to,
+      subject: subject,
+      text: content,
+      html: formatEmailHtml(content)
+    });
 
-      await env.SEND_EMAIL.send(message);
-      return { success: true };
-    }
-
-    console.warn('No email service configured.');
+    await env.SEND_EMAIL.send(message);
     return { success: true };
 
   } catch (error) {
