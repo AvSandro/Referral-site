@@ -75,7 +75,7 @@ Message: ${formData.message}`;
       to: env.DESTINATION_EMAIL || "drololl06@gmail.com",
       from: env.SEND_FROM || "leads@ntestatepartners.com",
       subject: `New Lead: ${formData.name}`,
-      content: [{ type: "text/plain", value: emailText }]
+      text: emailText
     });
 
 
