@@ -66,12 +66,21 @@ async function handlePostRequest(request, env) {
       budget: clean(data.get("budget")) || "Not specified"
     };
 
-    // Validate required fields.
-    const requiredFields = ['name', 'email', 'phone'];
-    for (const field of requiredFields) {
-      if (!formData[field] || formData[field].startsWith('No ')) {
-        return jsonResponse({ success: false, message: `Missing required field: ${field}` }, 400);
-      }
+    // Validate name: at least 3 characters, letters and spaces only
+    if (!formData.name || formData.name.length < 3 || !/^[a-zA-Z\s\-'.]+$/.test(formData.name)) {
+      return jsonResponse({ success: false, message: 'Please enter a valid full name (at least 3 characters).' }, 400);
+    }
+
+    // Validate email: proper format with reasonable domain
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    if (!formData.email || !emailRegex.test(formData.email) || formData.email.length > 100) {
+      return jsonResponse({ success: false, message: 'Please enter a valid email address.' }, 400);
+    }
+
+    // Validate phone: at least 7 digits present, only allowed characters
+    const digitCount = (formData.phone.match(/\d/g) || []).length;
+    if (!formData.phone || digitCount < 7 || !/^[0-9+\-()\s]+$/.test(formData.phone)) {
+      return jsonResponse({ success: false, message: 'Please enter a valid phone number with at least 7 digits.' }, 400);
     }
 
     // 2. Build the text for the email.
