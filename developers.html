@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NT Estate Partners - For Developers</title>
+    <title>Strategic Partnership for Estate Developers | Westlake &amp; Southlake Referral Network</title>
+    <meta name="description" content="Partner with NT Estate Partners to streamline your sub-contractor referrals and add value to your luxury home buyers.">
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -41,12 +42,39 @@
             <a href="index.html" class="back-link">← BACK TO GATEWAY</a>
             
             <h1>Capitalize on<br>Your Network</h1>
+
+            <h2 class="hero-h2">The Developer Advantage: Vetted Pros for Every Phase of the Build.</h2>
             
             <p class="secondary-text" style="margin: 2rem 0 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
                 NT Estate Partners provides a private channel for developers to monetize project introductions. Connect your high-ticket builds with our vetted master contractors and secure a 3% referral commission upon contract execution.
             </p>
 
-            <a href="mailto:ops@ntestatepartners.com?subject=Developer%20Partner%20Inquiry" class="btn-ghost">REGISTER AS PARTNER</a>
+            <a href="#developer-apply" class="btn-ghost">APPLY FOR PARTNERSHIP</a>
+        </div>
+    </section>
+
+    <!-- Partner Requirements Row -->
+    <section class="partner-requirements-section">
+        <div class="partner-requirements-container">
+            <span class="label" style="display: block; text-align: center; margin-bottom: 2rem;">PARTNER REQUIREMENTS</span>
+            <div class="partner-requirements-row">
+                <div class="partner-req">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span>Licensed &amp; Bonded</span>
+                </div>
+                <div class="partner-req">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>Fully Insured</span>
+                </div>
+                <div class="partner-req">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>5+ Years Experience</span>
+                </div>
+                <div class="partner-req">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    <span>Luxury Portfolio</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -83,16 +111,55 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="contact-section" style="padding: 6rem 2rem;">
+    <!-- Application Section -->
+    <section class="contact-section" id="developer-apply" style="padding: 6rem 2rem;">
         <div class="contact-container">
             <div class="contact-card">
                 <span class="label">NEXT STEP</span>
                 <h2 style="margin-top: 1rem; margin-bottom: 2rem;">Ready to Monetize Your Network?</h2>
                 <p style="margin-bottom: 2rem; color: #a8a29e;">
-                    Send us your profile with recent project examples and your typical referral volume.
+                    Custom home builders &amp; real estate developers — tell us about your operation below.
                 </p>
-                <a href="mailto:ops@ntestatepartners.com?subject=Developer%20Partner%20Application" class="btn-ghost">REGISTER AS PARTNER</a>
+
+                <form id="developer-form" class="partner-form" method="POST" action="/submit-referral">
+                    <input type="hidden" name="formType" value="developer-application">
+                    <div class="form-group">
+                        <label for="d-name">Full Name</label>
+                        <input type="text" id="d-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="d-company">Company Name</label>
+                        <input type="text" id="d-company" name="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="d-phone">Phone</label>
+                        <input type="tel" id="d-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="d-email">Email</label>
+                        <input type="email" id="d-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="d-role">Your Role</label>
+                        <select id="d-role" name="role" required>
+                            <option value="">Select your role...</option>
+                            <option value="custom-home-builder">Custom Home Builder</option>
+                            <option value="real-estate-developer">Real Estate Developer</option>
+                            <option value="general-contractor">General Contractor</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="d-volume">Typical Annual Project Volume</label>
+                        <input type="text" id="d-volume" name="volume" placeholder="e.g., 5–10 projects per year">
+                    </div>
+                    <div class="form-group">
+                        <label for="d-website">Portfolio / Website URL</label>
+                        <input type="url" id="d-website" name="portfolio" placeholder="https://">
+                    </div>
+                    <button type="submit" class="btn-ghost">APPLY FOR PARTNERSHIP</button>
+                    <div id="developer-form-message" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 4px;"></div>
+                </form>
             </div>
         </div>
     </section>
@@ -129,7 +196,7 @@
 
             <div class="footer-bottom">
                 <p class="footer-tagline">Built for the 1% of Contractors</p>
-                <p class="footer-copyright">&copy; 2024 NT Estate Partners. All rights reserved.</p>
+                <p class="footer-copyright">&copy; 2026 NT Estate Partners. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -152,6 +219,56 @@
 
     <!-- High-End Interactions Script -->
     <script src="interactions.js"></script>
+
+    <!-- Partner Form Submission -->
+    <script>
+    (function() {
+        'use strict';
+
+        var form = document.getElementById('developer-form');
+        if (!form) return;
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var messageDiv = document.getElementById('developer-form-message');
+            var submitBtn = form.querySelector('button[type="submit"]');
+            var originalText = submitBtn.textContent;
+
+            try {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'SUBMITTING...';
+
+                var response = await fetch('/submit-referral', {
+                    method: 'POST',
+                    body: new FormData(form)
+                });
+                var result = await response.json();
+
+                messageDiv.className = result.success ? 'success' : 'error';
+                messageDiv.textContent = result.message;
+                messageDiv.style.display = 'block';
+
+                if (result.success) {
+                    form.reset();
+                    submitBtn.textContent = '✓ SUBMITTED';
+                    setTimeout(function() {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 3000);
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            } catch (err) {
+                messageDiv.className = 'error';
+                messageDiv.textContent = 'An error occurred. Please try again.';
+                messageDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    })();
+    </script>
 
     <!-- Micro-Interactions & Scroll Physics -->
     <script>

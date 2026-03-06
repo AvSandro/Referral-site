@@ -16,19 +16,41 @@
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('reveal');
+                entry.target.classList.add('in-view');
                 revealObserver.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Apply reveal animation to major sections
+    // Apply scroll-reveal to major sections and trust boxes
     const revealElements = document.querySelectorAll(
-        '.hero, .divider-section, .how-it-works, .contact-section'
+        '.divider-section, .how-it-works, .contact-section, .trust-grid-section'
     );
     revealElements.forEach((el) => {
+        el.classList.add('scroll-reveal');
         revealObserver.observe(el);
     });
+
+    // Trust boxes: stagger individually
+    const trustBoxes = document.querySelectorAll('.trust-box');
+    const trustObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const boxes = entry.target.querySelectorAll('.trust-box');
+                boxes.forEach((box, index) => {
+                    setTimeout(() => {
+                        box.classList.add('in-view');
+                    }, index * 150);
+                });
+                trustObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const trustGrid = document.querySelector('.trust-grid');
+    if (trustGrid) {
+        trustObserver.observe(trustGrid);
+    }
 
     // ============================================
     // STAGGERED CARD REVEALS

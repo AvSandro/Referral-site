@@ -5,6 +5,7 @@
 /* Import Ultra-Minimalist Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 /* ============================================
    RESET & GLOBAL STYLES
@@ -40,7 +41,8 @@ html {
 
 body {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #000000;
+    background: linear-gradient(135deg, #111827 0%, #000000 100%);
+    background-attachment: fixed;
     color: #a8a29e;
     line-height: 1.8;
     font-weight: 300;
@@ -53,8 +55,8 @@ body {
    ============================================ */
 
 h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 100;
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-weight: 500;
     font-size: 4rem;
     letter-spacing: -0.02em;
     line-height: 1.1;
@@ -105,7 +107,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(17, 24, 39, 0.75);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -130,6 +132,17 @@ nav {
 /* ============================================
    ANIMATIONS & KEYFRAMES
    ============================================ */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 @keyframes kerning-expand {
     from {
@@ -184,7 +197,8 @@ nav {
 .btn-ghost {
     display: inline-block;
     padding: 1rem 2.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-height: 50px;
+    border: 1px solid #d4af37;
     background: transparent;
     color: #ffffff;
     font-weight: 700;
@@ -193,9 +207,10 @@ nav {
     text-transform: uppercase;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.15);
 }
 
 .btn-ghost::before {
@@ -211,13 +226,16 @@ nav {
 }
 
 .btn-ghost:hover {
-    border-color: rgba(255, 255, 255, 0.8);
-    color: #000000;
-    transform: scale(1.02);
+    border-color: #d4af37;
+    border-width: 2px;
+    color: #ffffff;
+    transform: scale(1.03);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.3), 0 0 36px rgba(212, 175, 55, 0.1);
 }
 
 .btn-ghost:hover::before {
     left: 0;
+    background-color: rgba(212, 175, 55, 0.06);
 }
 
 a.btn-ghost {
@@ -255,10 +273,187 @@ a.btn-ghost {
     max-width: 900px;
     position: relative;
     z-index: 1;
+    animation: fade-in 1.2s ease-out both;
 }
 
 .hero h1 {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subheadline {
+    font-size: 1.15rem;
+    color: #c4b998;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Authority Row */
+.authority-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+}
+
+.authority-pillar {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(212, 175, 55, 0.7);
+}
+
+.authority-divider {
+    color: rgba(255, 255, 255, 0.15);
+    font-weight: 100;
+    font-size: 0.85rem;
+}
+
+/* Micro-copy */
+.micro-copy {
+    font-size: 0.8rem;
+    color: rgba(212, 175, 55, 0.55);
+    margin-top: 1rem;
+    margin-bottom: 0;
+    letter-spacing: 0.04em;
+    font-weight: 300;
+}
+
+/* ============================================
+   SERVICE AREA SECTION
+   ============================================ */
+
+.service-area-section {
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.service-area-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.service-area-text h2 {
+    font-style: normal;
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+.service-area-locations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.location-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.location-tag svg {
+    color: #d4af37;
+    flex-shrink: 0;
+}
+
+.service-area-map {
+    width: 100%;
+    min-height: 380px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.service-area-map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+}
+
+/* ============================================
+   TRUST GRID (BENTO BOX LAYOUT)
+   ============================================ */
+
+.trust-grid-section {
+    padding: 5rem 2rem;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.trust-box {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.trust-box.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.trust-box:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(212, 175, 55, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.trust-icon {
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: center;
+}
+
+.trust-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+
+.trust-desc {
+    font-size: 0.875rem;
+    color: #a8a29e;
+    line-height: 1.7;
+    font-weight: 300;
 }
 
 /* ============================================
@@ -295,7 +490,7 @@ a.btn-ghost {
 
 .how-it-works {
     padding: 8rem 2rem;
-    background: #000000;
+    background: transparent;
 }
 
 .how-it-works-container {
@@ -353,7 +548,7 @@ a.btn-ghost {
 
 .contact-section {
     padding: 6rem 2rem;
-    background-color: #000000;
+    background-color: transparent;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -436,6 +631,130 @@ a.btn-ghost {
 }
 
 /* ============================================
+   DISCOVERY QUIZ
+   ============================================ */
+
+#discovery-quiz {
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-progress {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    margin-bottom: 2.5rem;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.quiz-progress-bar {
+    width: 25%;
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37, #c4a030);
+    transition: width 0.5s ease;
+    border-radius: 1px;
+}
+
+.quiz-step {
+    display: none;
+    animation: quiz-fade-in 0.4s ease-out;
+}
+
+.quiz-step.active {
+    display: block;
+}
+
+@keyframes quiz-fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.quiz-question {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.75rem;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    min-height: 50px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-align: left;
+}
+
+.quiz-option:hover {
+    background: rgba(212, 175, 55, 0.08);
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateX(4px);
+}
+
+.quiz-option.selected {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: #d4af37;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
+}
+
+.quiz-option-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37;
+    flex-shrink: 0;
+}
+
+.quiz-back {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    color: #a8a29e;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.quiz-back:hover {
+    color: #ffffff;
+}
+
+/* ============================================
    REFERRAL FORM
    ============================================ */
 
@@ -515,7 +834,7 @@ a.btn-ghost {
    ============================================ */
 
 footer {
-    background: #000000;
+    background: rgba(0, 0, 0, 0.3);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 4rem 2rem 2rem;
 }
@@ -641,6 +960,161 @@ header {
 }
 
 /* ============================================
+   PARTNER PAGES (Contractors & Developers)
+   ============================================ */
+
+.hero-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #c4b998;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.01em;
+}
+
+/* Partner Requirements Row */
+.partner-requirements-section {
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.partner-requirements-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.partner-requirements-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.partner-req {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+    padding: 1.75rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: #d4af37;
+    transition: all 0.3s ease;
+}
+
+.partner-req:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.partner-req span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+/* Partner Application Forms */
+.partner-form {
+    text-align: left;
+}
+
+.partner-form .form-group input,
+.partner-form .form-group select {
+    min-height: 50px;
+    font-size: 1rem;
+    padding: 0.875rem 1rem;
+}
+
+/* ============================================
+   PARTNER PITCH SECTION
+   ============================================ */
+
+.partner-pitch-section {
+    padding: 6rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.partner-pitch-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.partner-pitch-heading {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 2.25rem;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 3.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.25;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.benefit-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.benefit-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.benefit-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(212, 175, 55, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.benefit-icon {
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: center;
+}
+
+.benefit-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+
+.benefit-desc {
+    font-size: 0.875rem;
+    color: #a8a29e;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* ============================================
    MAGNETIC HOVER - GHOST BUTTONS
    ============================================ */
 
@@ -649,8 +1123,10 @@ header {
 }
 
 .btn-ghost:hover {
-    transform: scale(1.02) translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.03);
+    border-color: #d4af37;
+    border-width: 2px;
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.3), 0 0 36px rgba(212, 175, 55, 0.1);
 }
 
 /* ============================================
@@ -664,6 +1140,21 @@ header {
 .contact-card:hover {
     transform: scale(1.02);
     border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   SCROLL-TRIGGERED SECTION REVEALS
+   ============================================ */
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ============================================
@@ -709,6 +1200,24 @@ header {
     .hero {
         min-height: 80vh;
         padding: 3rem 1.5rem;
+        text-align: center;
+    }
+
+    .hero-content,
+    .how-it-works-container,
+    .contact-container {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-subheadline {
+        font-size: 1rem;
+    }
+
+    .authority-row {
+        flex-wrap: wrap;
+        gap: 0.75rem;
     }
 
     .divider-line {
@@ -717,6 +1226,7 @@ header {
 
     .how-it-works {
         padding: 4rem 1.5rem;
+        text-align: center;
     }
 
     .steps-grid {
@@ -727,6 +1237,36 @@ header {
         padding: 2rem 1.5rem;
     }
 
+    .quiz-question {
+        font-size: 1.4rem;
+    }
+
+    .quiz-options {
+        max-width: 100%;
+    }
+
+    .quiz-option {
+        min-height: 50px;
+        padding: 0.875rem 1.25rem;
+    }
+
+    .service-area-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .service-area-map {
+        min-height: 300px;
+    }
+
+    .service-area-map iframe {
+        min-height: 300px;
+    }
+
+    .service-area-text h2 {
+        font-size: 1.6rem;
+    }
+
     .email-display {
         font-size: 1.125rem;
     }
@@ -734,6 +1274,53 @@ header {
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    .btn-ghost {
+        min-height: 50px;
+        padding: 0.875rem 2rem;
+    }
+
+    .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 90%;
+    }
+
+    .trust-box {
+        padding: 2rem 1.5rem;
+    }
+
+    .partner-requirements-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .hero-h2 {
+        font-size: 1.25rem;
+    }
+
+    .partner-form .form-group input,
+    .partner-form .form-group select {
+        min-height: 50px;
+        font-size: 1rem;
+    }
+
+    .partner-pitch-section {
+        padding: 5rem 1.5rem;
+    }
+
+    .partner-pitch-header {
+        font-size: 2rem;
+    }
+
+    .partner-benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .partner-benefit-box {
+        padding: 2rem 1.5rem;
     }
 }
 
@@ -749,11 +1336,55 @@ header {
 
     .hero {
         min-height: 60vh;
-        padding: 2rem 1rem;
+        padding: 2rem 5%;
+        text-align: center;
     }
 
     .hero h1 {
         font-size: 1.75rem;
+    }
+
+    .hero-content,
+    .how-it-works-container,
+    .contact-container,
+    .divider-section {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-subheadline {
+        font-size: 0.95rem;
+    }
+
+    .authority-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .authority-divider {
+        display: none;
+    }
+
+    .service-area-container {
+        gap: 1.5rem;
+    }
+
+    .service-area-map {
+        min-height: 250px;
+    }
+
+    .service-area-map iframe {
+        min-height: 250px;
+    }
+
+    .service-area-text h2 {
+        font-size: 1.35rem;
+    }
+
+    .location-tag {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.75rem;
     }
 
     .divider-section {
@@ -766,6 +1397,7 @@ header {
 
     .how-it-works {
         padding: 3rem 1rem;
+        text-align: center;
     }
 
     .step {
@@ -785,8 +1417,45 @@ header {
     }
 
     .btn-ghost {
-        padding: 0.75rem 1.5rem;
+        min-height: 50px;
+        padding: 0.875rem 1.5rem;
         font-size: 0.75rem;
+    }
+
+    .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        max-width: 90%;
+    }
+
+    .trust-box {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .partner-requirements-row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .partner-req {
+        flex-direction: row;
+        padding: 1.25rem 1rem;
+    }
+
+    .hero-h2 {
+        font-size: 1.1rem;
+    }
+
+    .partner-pitch-section {
+        padding: 4rem 5%;
+    }
+
+    .partner-pitch-header {
+        font-size: 1.5rem;
+    }
+
+    .partner-benefit-box {
+        padding: 1.5rem 1rem;
     }
 }
 
