@@ -5,12 +5,13 @@ workers_dev = false
 compatibility_date = "2026-03-05"
 route = "ntestatepartners.com/*"
 
-# This is the "magic" line that sends email without crashing
 [[send_email]]
 name = "SEND_EMAIL"
+destination_address = "drololl06@gmail.com"
 
 [vars]
 SEND_FROM = "leads@ntestatepartners.com"
+DESTINATION_EMAIL = "drololl06@gmail.com"
 
 [observability]
 enabled = true

@@ -5,6 +5,9 @@
  * - Sends lead details to ops@ntestatepartners.com
  */
 
+import { EmailMessage } from "cloudflare:email";
+import { createMimeMessage } from "mimetext";
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -133,81 +136,24 @@ Source: ntestatepartners.com
 }
 
 /**
- * Send email via Cloudflare Email Routing Worker
- * 
- * Note: You need to set up Cloudflare Email Routing first:
- * 1. Configure a forwarding rule in Cloudflare Dashboard
- * 2. Set the binding in wrangler.toml:
- *    [[env.production.bindings]]
- *    name = "SEND_EMAIL"
- *    type = "service"
- *    service = "send-email"
- *    environment = "production"
+ * Send email via Cloudflare Email Routing
  */
 async function sendEmail(env, to, subject, content) {
   try {
-    // Option 1: Using Cloudflare Email Routing (if available)
-    if (env.SEND_EMAIL) {
-      await env.SEND_EMAIL.sendEmail({
-        to: to,
-        from: 'noreply@ntestatepartners.com',
-        subject: subject,
-        html: formatEmailHtml(content),
-        text: content
-      });
-      return { success: true };
-    }
+    const msg = createMimeMessage();
+    msg.setSender({ name: "NT Estate Partners", addr: env.SEND_FROM || "leads@ntestatepartners.com" });
+    msg.setRecipient(to);
+    msg.setSubject(subject);
+    msg.addMessage({ contentType: "text/plain", data: content });
+    msg.addMessage({ contentType: "text/html", data: formatEmailHtml(content) });
 
-    // Option 2: Using a third-party API (SendGrid, Mailgun, etc.)
-    // Example with SendGrid:
-    if (env.SENDGRID_API_KEY) {
-      const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${env.SENDGRID_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          personalizations: [{ to: [{ email: to }] }],
-          from: { email: 'noreply@ntestatepartners.com' },
-          subject: subject,
-          content: [{ type: 'text/html', value: formatEmailHtml(content) }]
-        })
-      });
+    const message = new EmailMessage(
+      env.SEND_FROM || "leads@ntestatepartners.com",
+      to,
+      msg.asRaw()
+    );
 
-      if (!response.ok) {
-        throw new Error(`SendGrid error: ${response.statusText}`);
-      }
-      return { success: true };
-    }
-
-    // Option 3: Using Mailgun
-    if (env.MAILGUN_API_KEY && env.MAILGUN_DOMAIN) {
-      const response = await fetch(
-        `https://api.mailgun.net/v3/${env.MAILGUN_DOMAIN}/messages`,
-        {
-          method: 'POST',
-          headers: {
-            'Authorization': `Basic ${btoa(`api:${env.MAILGUN_API_KEY}`)}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams({
-            from: 'NT Estate Partners <noreply@ntestatepartners.com>',
-            to: to,
-            subject: subject,
-            html: formatEmailHtml(content)
-          })
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Mailgun error: ${response.statusText}`);
-      }
-      return { success: true };
-    }
-
-    // If no email service is configured, log and return mock success
-    console.warn('No email service configured. Email would have been sent to:', to);
+    await env.SEND_EMAIL.send(message);
     return { success: true };
 
   } catch (error) {
