@@ -55,52 +55,56 @@ async function handleGetRequest(env) {
  */
 async function handlePostRequest(request, env) {
   try {
-    // Parse form data
-    const contentType = request.headers.get('Content-Type');
-    let formData = {};
+    if (request.method === 'POST') {
+      // Parse form data only for POST requests.
+      const contentType = request.headers.get('Content-Type');
+      let formData = {};
 
-    if (contentType && contentType.includes('application/x-www-form-urlencoded')) {
-      const text = await request.text();
-      const params = new URLSearchParams(text);
-      formData = Object.fromEntries(params.entries());
-    } else if (contentType && contentType.includes('multipart/form-data')) {
-      const data = await request.formData();
-      formData = Object.fromEntries(data.entries());
-    } else if (contentType && contentType.includes('application/json')) {
-      formData = await request.json();
-    }
-
-    // Validate required fields
-    const requiredFields = ['name', 'email', 'phone'];
-    for (const field of requiredFields) {
-      if (!formData[field]) {
-        return jsonResponse(
-          { success: false, message: `Missing required field: ${field}` },
-          400
-        );
+      if (contentType && contentType.includes('application/x-www-form-urlencoded')) {
+        const text = await request.text();
+        const params = new URLSearchParams(text);
+        formData = Object.fromEntries(params.entries());
+      } else if (contentType && contentType.includes('multipart/form-data')) {
+        const data = await request.formData();
+        formData = Object.fromEntries(data.entries());
+      } else if (contentType && contentType.includes('application/json')) {
+        formData = await request.json();
       }
+
+      // Validate required fields
+      const requiredFields = ['name', 'email', 'phone'];
+      for (const field of requiredFields) {
+        if (!formData[field]) {
+          return jsonResponse(
+            { success: false, message: `Missing required field: ${field}` },
+            400
+          );
+        }
+      }
+
+      // Build email content
+      const emailContent = buildEmailContent(formData);
+
+      // Send email via MailChannels
+      const emailResponse = await sendEmail(
+        env,
+        env.DESTINATION_EMAIL || 'drololl06@gmail.com',
+        `New Estate Referral from ${formData.name}`,
+        emailContent
+      );
+
+      if (!emailResponse.success) {
+        throw new Error('Failed to send email');
+      }
+
+      // Return success response
+      return jsonResponse({
+        success: true,
+        message: 'Your estate referral is being processed. Our ops team will connect with a vetted partner within 48 hours.'
+      });
     }
 
-    // Build email content
-    const emailContent = buildEmailContent(formData);
-
-    // Send email via MailChannels
-    const emailResponse = await sendEmail(
-      env,
-      env.DESTINATION_EMAIL || 'drololl06@gmail.com',
-      `New Estate Referral from ${formData.name}`,
-      emailContent
-    );
-
-    if (!emailResponse.success) {
-      throw new Error('Failed to send email');
-    }
-
-    // Return success response
-    return jsonResponse({
-      success: true,
-      message: 'Your estate referral is being processed. Our ops team will connect with a vetted partner within 48 hours.'
-    });
+    return jsonResponse({ success: false, message: 'Method Not Allowed' }, 405);
 
   } catch (error) {
     console.error('Form submission error:', error);
