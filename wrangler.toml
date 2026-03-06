@@ -5,9 +5,9 @@ workers_dev = false
 compatibility_date = "2026-03-05"
 route = "ntestatepartners.com/*"
 
-[[services]]
-binding = "SEND_EMAIL"
-service = "send-email"
+# This is the "magic" line that sends email without crashing
+[[send_email]]
+name = "SEND_EMAIL"
 
 [vars]
 SEND_FROM = "leads@ntestatepartners.com"
