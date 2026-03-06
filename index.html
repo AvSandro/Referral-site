@@ -211,15 +211,11 @@
 
                 // Collect form data
                 const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
 
                 // Send POST request to Cloudflare Worker
                 const response = await fetch('/submit-referral', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                    body: formData
                 });
 
                 const result = await response.json();
