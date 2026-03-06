@@ -48,15 +48,22 @@ async function handleGetRequest(env) {
 async function handlePostRequest(request, env) {
   try {
     const data = await request.formData();
+
+    // Sanitize text input to prevent injection
+    function clean(str) {
+      if (!str) return '';
+      return String(str).replace(/[<>]/g, '').trim().slice(0, 500);
+    }
+
     const formData = {
-      name: data.get("name") || "No Name",
-      email: data.get("email") || "No Email",
-      phone: data.get("phone") || "No Phone",
-      message: data.get("message") || "No Message",
-      primaryGoal: data.get("primaryGoal") || "Not specified",
-      neighborhood: data.get("neighborhood") || "Not specified",
-      timeline: data.get("timeline") || "Not specified",
-      budget: data.get("budget") || "Not specified"
+      name: clean(data.get("name")) || "No Name",
+      email: clean(data.get("email")) || "No Email",
+      phone: clean(data.get("phone")) || "No Phone",
+      message: clean(data.get("message")) || "No Message",
+      primaryGoal: clean(data.get("primaryGoal")) || "Not specified",
+      neighborhood: clean(data.get("neighborhood")) || "Not specified",
+      timeline: clean(data.get("timeline")) || "Not specified",
+      budget: clean(data.get("budget")) || "Not specified"
     };
 
     // Validate required fields.
