@@ -9,24 +9,30 @@
 
 export default {
   async fetch(request, env) {
-    // Only process submission logic on POST requests.
-    if (request.method === 'POST') {
+    
+    // ADD THIS LINE HERE:
+    if (request.method === "POST") {
       try {
-        const url = new URL(request.url);
-        if (url.pathname !== '/submit-referral') {
-          return new Response('Not Found', { status: 404 });
-        }
-
-        return await handlePostRequest(request, env);
-      } catch (e) {
-        return new Response(`Error: ${e.message}`, { status: 500 });
+        const formData = await request.formData();
+        
+        // EVERYTHING that uses formData.get() goes INSIDE these curly braces { }
+        const name = formData.get("name"); 
+        
+        // ... all your email sending code ...
+        
+        return new Response("Success!");
+      } catch (err) {
+        return new Response(err.message, { status: 500 });
       }
-    }
+    } // END OF THE POST CHECK
 
-    // For standard page visits (GET), serve the home page.
-    return handleGetRequest(env);
+    // ADD THIS FOR THE HOME PAGE (GET):
+    return new Response("NT Estate Partners is Live!", {
+      headers: { "Content-Type": "text/html" }
+    });
   }
 };
+
 
 /**
  * Serve HTML for GET requests
