@@ -140,20 +140,25 @@ Source: ntestatepartners.com
  */
 async function sendEmail(env, to, subject, content) {
   try {
-    const msg = createMimeMessage();
-    msg.setSender({ name: "NT Estate Partners", addr: env.SEND_FROM || "leads@ntestatepartners.com" });
-    msg.setRecipient(to);
-    msg.setSubject(subject);
-    msg.addMessage({ contentType: "text/plain", data: content });
-    msg.addMessage({ contentType: "text/html", data: formatEmailHtml(content) });
+    if (env.SEND_EMAIL) {
+      const msg = createMimeMessage();
+      msg.setSender({ name: "NT Estate Partners", addr: env.SEND_FROM || "leads@ntestatepartners.com" });
+      msg.setRecipient(to);
+      msg.setSubject(subject);
+      msg.addMessage({ contentType: "text/plain", data: content });
+      msg.addMessage({ contentType: "text/html", data: formatEmailHtml(content) });
 
-    const message = new EmailMessage(
-      env.SEND_FROM || "leads@ntestatepartners.com",
-      to,
-      msg.asRaw()
-    );
+      const message = new EmailMessage(
+        env.SEND_FROM || "leads@ntestatepartners.com",
+        to,
+        msg.asRaw()
+      );
 
-    await env.SEND_EMAIL.send(message);
+      await env.SEND_EMAIL.send(message);
+      return { success: true };
+    }
+
+    console.warn('No email service configured.');
     return { success: true };
 
   } catch (error) {
