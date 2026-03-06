@@ -8,21 +8,23 @@
 // No imports needed — uses MailChannels API (free from Cloudflare Workers)
 
 export default {
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url);
+  async fetch(request, env) {
+    // Only process submission logic on POST requests.
+    if (request.method === 'POST') {
+      try {
+        const url = new URL(request.url);
+        if (url.pathname !== '/submit-referral') {
+          return new Response('Not Found', { status: 404 });
+        }
 
-    // Handle GET requests - serve HTML
-    if (request.method === 'GET') {
-      return handleGetRequest(env);
+        return await handlePostRequest(request, env);
+      } catch (e) {
+        return new Response(`Error: ${e.message}`, { status: 500 });
+      }
     }
 
-    // Handle POST requests - process form submission
-    if (request.method === 'POST' && url.pathname === '/submit-referral') {
-      return handlePostRequest(request, env);
-    }
-
-    // Default 404
-    return new Response('Not Found', { status: 404 });
+    // For standard page visits (GET), serve the home page.
+    return handleGetRequest(env);
   }
 };
 
